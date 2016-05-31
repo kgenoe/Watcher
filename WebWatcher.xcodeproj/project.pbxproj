@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27A74ECE1CFE17D400FE1A80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ECD1CFE17D400FE1A80 /* main.m */; };
+		27A74ED11CFE17D400FE1A80 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ED01CFE17D400FE1A80 /* AppDelegate.m */; };
+		27A74ED41CFE17D400FE1A80 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ED31CFE17D400FE1A80 /* ViewController.m */; };
+		27A74ED71CFE17D500FE1A80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A74ED51CFE17D500FE1A80 /* Main.storyboard */; };
+		27A74EDA1CFE17D600FE1A80 /* WebWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ED81CFE17D600FE1A80 /* WebWatcher.xcdatamodeld */; };
+		27A74EDC1CFE17D600FE1A80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */; };
+		27A74EDF1CFE17D600FE1A80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A74EDD1CFE17D600FE1A80 /* LaunchScreen.storyboard */; };
+		27A74EEA1CFE17DA00FE1A80 /* WebWatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74EE91CFE17DA00FE1A80 /* WebWatcherTests.m */; };
+		27A74EF51CFE17DB00FE1A80 /* WebWatcherUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74EF41CFE17DB00FE1A80 /* WebWatcherUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		27A74EE61CFE17DA00FE1A80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27A74EC11CFE17D300FE1A80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27A74EC81CFE17D400FE1A80;
+			remoteInfo = WebWatcher;
+		};
+		27A74EF11CFE17DA00FE1A80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27A74EC11CFE17D300FE1A80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27A74EC81CFE17D400FE1A80;
+			remoteInfo = WebWatcher;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		27A74EC91CFE17D400FE1A80 /* WebWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		27A74ECD1CFE17D400FE1A80 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		27A74ECF1CFE17D400FE1A80 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		27A74ED01CFE17D400FE1A80 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		27A74ED21CFE17D400FE1A80 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		27A74ED31CFE17D400FE1A80 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		27A74ED61CFE17D500FE1A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		27A74ED91CFE17D600FE1A80 /* WebWatcher.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WebWatcher.xcdatamodel; sourceTree = "<group>"; };
+		27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		27A74EDE1CFE17D600FE1A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		27A74EE01CFE17D600FE1A80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27A74EE51CFE17DA00FE1A80 /* WebWatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebWatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27A74EE91CFE17DA00FE1A80 /* WebWatcherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebWatcherTests.m; sourceTree = "<group>"; };
+		27A74EEB1CFE17DA00FE1A80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27A74EF01CFE17DA00FE1A80 /* WebWatcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebWatcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27A74EF41CFE17DB00FE1A80 /* WebWatcherUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebWatcherUITests.m; sourceTree = "<group>"; };
+		27A74EF61CFE17DB00FE1A80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		27A74EC61CFE17D400FE1A80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27A74EE21CFE17DA00FE1A80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27A74EED1CFE17DA00FE1A80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		27A74EC01CFE17D300FE1A80 = {
+			isa = PBXGroup;
+			children = (
+				27A74ECB1CFE17D400FE1A80 /* WebWatcher */,
+				27A74EE81CFE17DA00FE1A80 /* WebWatcherTests */,
+				27A74EF31CFE17DA00FE1A80 /* WebWatcherUITests */,
+				27A74ECA1CFE17D400FE1A80 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		27A74ECA1CFE17D400FE1A80 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27A74EC91CFE17D400FE1A80 /* WebWatcher.app */,
+				27A74EE51CFE17DA00FE1A80 /* WebWatcherTests.xctest */,
+				27A74EF01CFE17DA00FE1A80 /* WebWatcherUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27A74ECB1CFE17D400FE1A80 /* WebWatcher */ = {
+			isa = PBXGroup;
+			children = (
+				27A74ECF1CFE17D400FE1A80 /* AppDelegate.h */,
+				27A74ED01CFE17D400FE1A80 /* AppDelegate.m */,
+				27A74ED21CFE17D400FE1A80 /* ViewController.h */,
+				27A74ED31CFE17D400FE1A80 /* ViewController.m */,
+				27A74ED51CFE17D500FE1A80 /* Main.storyboard */,
+				27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */,
+				27A74EDD1CFE17D600FE1A80 /* LaunchScreen.storyboard */,
+				27A74EE01CFE17D600FE1A80 /* Info.plist */,
+				27A74ED81CFE17D600FE1A80 /* WebWatcher.xcdatamodeld */,
+				27A74ECC1CFE17D400FE1A80 /* Supporting Files */,
+			);
+			path = WebWatcher;
+			sourceTree = "<group>";
+		};
+		27A74ECC1CFE17D400FE1A80 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				27A74ECD1CFE17D400FE1A80 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27A74EE81CFE17DA00FE1A80 /* WebWatcherTests */ = {
+			isa = PBXGroup;
+			children = (
+				27A74EE91CFE17DA00FE1A80 /* WebWatcherTests.m */,
+				27A74EEB1CFE17DA00FE1A80 /* Info.plist */,
+			);
+			path = WebWatcherTests;
+			sourceTree = "<group>";
+		};
+		27A74EF31CFE17DA00FE1A80 /* WebWatcherUITests */ = {
+			isa = PBXGroup;
+			children = (
+				27A74EF41CFE17DB00FE1A80 /* WebWatcherUITests.m */,
+				27A74EF61CFE17DB00FE1A80 /* Info.plist */,
+			);
+			path = WebWatcherUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		27A74EC81CFE17D400FE1A80 /* WebWatcher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27A74EF91CFE17DB00FE1A80 /* Build configuration list for PBXNativeTarget "WebWatcher" */;
+			buildPhases = (
+				27A74EC51CFE17D400FE1A80 /* Sources */,
+				27A74EC61CFE17D400FE1A80 /* Frameworks */,
+				27A74EC71CFE17D400FE1A80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WebWatcher;
+			productName = WebWatcher;
+			productReference = 27A74EC91CFE17D400FE1A80 /* WebWatcher.app */;
+			productType = "com.apple.product-type.application";
+		};
+		27A74EE41CFE17DA00FE1A80 /* WebWatcherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27A74EFC1CFE17DB00FE1A80 /* Build configuration list for PBXNativeTarget "WebWatcherTests" */;
+			buildPhases = (
+				27A74EE11CFE17DA00FE1A80 /* Sources */,
+				27A74EE21CFE17DA00FE1A80 /* Frameworks */,
+				27A74EE31CFE17DA00FE1A80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27A74EE71CFE17DA00FE1A80 /* PBXTargetDependency */,
+			);
+			name = WebWatcherTests;
+			productName = WebWatcherTests;
+			productReference = 27A74EE51CFE17DA00FE1A80 /* WebWatcherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		27A74EEF1CFE17DA00FE1A80 /* WebWatcherUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27A74EFF1CFE17DB00FE1A80 /* Build configuration list for PBXNativeTarget "WebWatcherUITests" */;
+			buildPhases = (
+				27A74EEC1CFE17DA00FE1A80 /* Sources */,
+				27A74EED1CFE17DA00FE1A80 /* Frameworks */,
+				27A74EEE1CFE17DA00FE1A80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27A74EF21CFE17DA00FE1A80 /* PBXTargetDependency */,
+			);
+			name = WebWatcherUITests;
+			productName = WebWatcherUITests;
+			productReference = 27A74EF01CFE17DA00FE1A80 /* WebWatcherUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		27A74EC11CFE17D300FE1A80 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Kyle Genoe";
+				TargetAttributes = {
+					27A74EC81CFE17D400FE1A80 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					27A74EE41CFE17DA00FE1A80 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 27A74EC81CFE17D400FE1A80;
+					};
+					27A74EEF1CFE17DA00FE1A80 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 27A74EC81CFE17D400FE1A80;
+					};
+				};
+			};
+			buildConfigurationList = 27A74EC41CFE17D300FE1A80 /* Build configuration list for PBXProject "WebWatcher" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 27A74EC01CFE17D300FE1A80;
+			productRefGroup = 27A74ECA1CFE17D400FE1A80 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				27A74EC81CFE17D400FE1A80 /* WebWatcher */,
+				27A74EE41CFE17DA00FE1A80 /* WebWatcherTests */,
+				27A74EEF1CFE17DA00FE1A80 /* WebWatcherUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		27A74EC71CFE17D400FE1A80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27A74EDF1CFE17D600FE1A80 /* LaunchScreen.storyboard in Resources */,
+				27A74EDC1CFE17D600FE1A80 /* Assets.xcassets in Resources */,
+				27A74ED71CFE17D500FE1A80 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27A74EE31CFE17DA00FE1A80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27A74EEE1CFE17DA00FE1A80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		27A74EC51CFE17D400FE1A80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27A74ED41CFE17D400FE1A80 /* ViewController.m in Sources */,
+				27A74ED11CFE17D400FE1A80 /* AppDelegate.m in Sources */,
+				27A74ECE1CFE17D400FE1A80 /* main.m in Sources */,
+				27A74EDA1CFE17D600FE1A80 /* WebWatcher.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27A74EE11CFE17DA00FE1A80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27A74EEA1CFE17DA00FE1A80 /* WebWatcherTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27A74EEC1CFE17DA00FE1A80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27A74EF51CFE17DB00FE1A80 /* WebWatcherUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		27A74EE71CFE17DA00FE1A80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27A74EC81CFE17D400FE1A80 /* WebWatcher */;
+			targetProxy = 27A74EE61CFE17DA00FE1A80 /* PBXContainerItemProxy */;
+		};
+		27A74EF21CFE17DA00FE1A80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27A74EC81CFE17D400FE1A80 /* WebWatcher */;
+			targetProxy = 27A74EF11CFE17DA00FE1A80 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		27A74ED51CFE17D500FE1A80 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27A74ED61CFE17D500FE1A80 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		27A74EDD1CFE17D600FE1A80 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27A74EDE1CFE17D600FE1A80 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		27A74EF71CFE17DB00FE1A80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		27A74EF81CFE17DB00FE1A80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		27A74EFA1CFE17DB00FE1A80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WebWatcher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		27A74EFB1CFE17DB00FE1A80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WebWatcher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		27A74EFD1CFE17DB00FE1A80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WebWatcherTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WebWatcher.app/WebWatcher";
+			};
+			name = Debug;
+		};
+		27A74EFE1CFE17DB00FE1A80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WebWatcherTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WebWatcher.app/WebWatcher";
+			};
+			name = Release;
+		};
+		27A74F001CFE17DB00FE1A80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WebWatcherUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = WebWatcher;
+			};
+			name = Debug;
+		};
+		27A74F011CFE17DB00FE1A80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = WebWatcherUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = WebWatcher;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		27A74EC41CFE17D300FE1A80 /* Build configuration list for PBXProject "WebWatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27A74EF71CFE17DB00FE1A80 /* Debug */,
+				27A74EF81CFE17DB00FE1A80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27A74EF91CFE17DB00FE1A80 /* Build configuration list for PBXNativeTarget "WebWatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27A74EFA1CFE17DB00FE1A80 /* Debug */,
+				27A74EFB1CFE17DB00FE1A80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		27A74EFC1CFE17DB00FE1A80 /* Build configuration list for PBXNativeTarget "WebWatcherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27A74EFD1CFE17DB00FE1A80 /* Debug */,
+				27A74EFE1CFE17DB00FE1A80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		27A74EFF1CFE17DB00FE1A80 /* Build configuration list for PBXNativeTarget "WebWatcherUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27A74F001CFE17DB00FE1A80 /* Debug */,
+				27A74F011CFE17DB00FE1A80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		27A74ED81CFE17D600FE1A80 /* WebWatcher.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				27A74ED91CFE17D600FE1A80 /* WebWatcher.xcdatamodel */,
+			);
+			currentVersion = 27A74ED91CFE17D600FE1A80 /* WebWatcher.xcdatamodel */;
+			path = WebWatcher.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 27A74EC11CFE17D300FE1A80 /* Project object */;
+}
