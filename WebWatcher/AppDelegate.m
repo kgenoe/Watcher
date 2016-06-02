@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "WebsiteTableViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <UISplitViewControllerDelegate>
 
 @end
 
@@ -16,22 +17,43 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    //Override splitviewcontroller launch
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+    splitViewController.delegate = self;
+    
+    
+    //Sets refresh interval for background fetch (used for checking the website status)
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
+    //register for notifications
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        NSLog(@"Registered for notifications");
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil]];
+    }
+    
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    NSLog(@"willResignActive");
+
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    NSLog(@"didEnterBackground");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    NSLog(@"willEnterForeground");
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -41,11 +63,100 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+    NSLog(@"willTerminate");
     [self saveContext];
 }
 
-#pragma mark - Core Data stack
+#pragma mark - Background refresh
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    
+    NSLog(@"########### Received Background Fetch ###########");
+    
+    //Get Schedule Blocking Data from NSUserDefaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
 
+    for (int i = 0; i< [watchedItemsArray count]; i++) {
+        NSMutableArray *watchedWebsite = [[watchedItemsArray objectAtIndex:i]mutableCopy];
+        NSString *urlString = [watchedWebsite objectAtIndex:0];
+        NSString *oldHtmlString = [watchedWebsite objectAtIndex:1];
+
+        NSLog(@"url:%@",urlString);
+
+        
+        NSURL *url = [NSURL URLWithString:urlString];
+        
+        NSLog(@"Pinging HTML...");
+        NSError *error = nil;
+        NSString *newHtmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+        NSLog(@"Recieved HTML");
+        
+        if ([oldHtmlString isEqualToString:@""]) {
+            //1st check, replace @"" with newhtml string in the nsuserdefaults item
+            [watchedWebsite replaceObjectAtIndex:1 withObject:newHtmlString];
+            [watchedItemsArray replaceObjectAtIndex:i withObject:watchedWebsite];
+            [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
+            [defaults synchronize];
+            completionHandler(UIBackgroundFetchResultNewData);
+        }
+        else if (![newHtmlString isEqualToString:oldHtmlString]) {
+            //There have been changes in the html since the last check
+            NSLog(@"CHANGES!");
+            
+            //update changes in NSUserDefaults
+            [watchedWebsite replaceObjectAtIndex:1 withObject:newHtmlString];
+            [watchedItemsArray replaceObjectAtIndex:i withObject:watchedWebsite];
+            [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
+            [defaults synchronize];
+
+            //schedule notifications for this item
+            [self scheduleNotificationsForWatchedItemAtIndex:i];
+            
+            //notify handler that background activity was successful
+            completionHandler(UIBackgroundFetchResultNewData);
+        }
+        else{
+            NSLog(@"There are no changes");
+            //no changes in html
+            completionHandler(UIBackgroundFetchResultNoData);
+        }
+    }
+}
+
+//Schedules the notifications for a website after changes have been detected
+- (void)scheduleNotificationsForWatchedItemAtIndex:(NSInteger)index{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
+    NSMutableArray *watchedWebsite = [[watchedItemsArray objectAtIndex:index]mutableCopy];
+    NSString *urlString = [watchedWebsite objectAtIndex:0];
+
+    for(int i = 0;i < 5; i++){
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.alertBody = [NSString stringWithFormat:@"%@ has been changed!",urlString];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        
+        //set notification fire date                      +1 to fire after this code executed
+        NSDate *scheduleDate = [NSDate dateWithTimeIntervalSinceNow:60*5*i];
+        localNotification.fireDate = scheduleDate;
+        
+        //schedule the notification
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    }
+}
+
+
+#pragma mark - Splitview Delegate
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
+    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[WebsiteTableViewController class]] && ([(WebsiteTableViewController *)[(UINavigationController *)secondaryViewController topViewController] itemIndex] == nil)) {
+        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+#pragma mark - Core Data stack
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -93,7 +204,6 @@
     return _persistentStoreCoordinator;
 }
 
-
 - (NSManagedObjectContext *)managedObjectContext {
     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
     if (_managedObjectContext != nil) {
@@ -110,7 +220,6 @@
 }
 
 #pragma mark - Core Data Saving support
-
 - (void)saveContext {
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {

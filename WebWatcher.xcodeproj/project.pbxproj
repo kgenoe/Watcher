@@ -7,15 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2754BF781D00CE4100B6A1D1 /* NewWebsiteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2754BF771D00CE4100B6A1D1 /* NewWebsiteTableViewController.m */; };
 		27A74ECE1CFE17D400FE1A80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ECD1CFE17D400FE1A80 /* main.m */; };
 		27A74ED11CFE17D400FE1A80 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ED01CFE17D400FE1A80 /* AppDelegate.m */; };
-		27A74ED41CFE17D400FE1A80 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ED31CFE17D400FE1A80 /* ViewController.m */; };
 		27A74ED71CFE17D500FE1A80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A74ED51CFE17D500FE1A80 /* Main.storyboard */; };
 		27A74EDA1CFE17D600FE1A80 /* WebWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ED81CFE17D600FE1A80 /* WebWatcher.xcdatamodeld */; };
 		27A74EDC1CFE17D600FE1A80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */; };
 		27A74EDF1CFE17D600FE1A80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A74EDD1CFE17D600FE1A80 /* LaunchScreen.storyboard */; };
 		27A74EEA1CFE17DA00FE1A80 /* WebWatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74EE91CFE17DA00FE1A80 /* WebWatcherTests.m */; };
 		27A74EF51CFE17DB00FE1A80 /* WebWatcherUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74EF41CFE17DB00FE1A80 /* WebWatcherUITests.m */; };
+		27A74F041CFE1EC700FE1A80 /* WebsiteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74F031CFE1EC700FE1A80 /* WebsiteTableViewController.m */; };
+		27A74F071CFE3A7600FE1A80 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74F061CFE3A7600FE1A80 /* ListTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,12 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2754BF761D00CE4100B6A1D1 /* NewWebsiteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewWebsiteTableViewController.h; path = Classes/NewWebsiteTableViewController.h; sourceTree = "<group>"; };
+		2754BF771D00CE4100B6A1D1 /* NewWebsiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewWebsiteTableViewController.m; path = Classes/NewWebsiteTableViewController.m; sourceTree = "<group>"; };
 		27A74EC91CFE17D400FE1A80 /* WebWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A74ECD1CFE17D400FE1A80 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		27A74ECF1CFE17D400FE1A80 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		27A74ED01CFE17D400FE1A80 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		27A74ED21CFE17D400FE1A80 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		27A74ED31CFE17D400FE1A80 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		27A74ED61CFE17D500FE1A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27A74ED91CFE17D600FE1A80 /* WebWatcher.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WebWatcher.xcdatamodel; sourceTree = "<group>"; };
 		27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +55,10 @@
 		27A74EF01CFE17DA00FE1A80 /* WebWatcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebWatcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A74EF41CFE17DB00FE1A80 /* WebWatcherUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebWatcherUITests.m; sourceTree = "<group>"; };
 		27A74EF61CFE17DB00FE1A80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27A74F021CFE1EC700FE1A80 /* WebsiteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebsiteTableViewController.h; path = Classes/WebsiteTableViewController.h; sourceTree = "<group>"; };
+		27A74F031CFE1EC700FE1A80 /* WebsiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebsiteTableViewController.m; path = Classes/WebsiteTableViewController.m; sourceTree = "<group>"; };
+		27A74F051CFE3A7600FE1A80 /* ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListTableViewController.h; path = Classes/ListTableViewController.h; sourceTree = "<group>"; };
+		27A74F061CFE3A7600FE1A80 /* ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListTableViewController.m; path = Classes/ListTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +111,14 @@
 			children = (
 				27A74ECF1CFE17D400FE1A80 /* AppDelegate.h */,
 				27A74ED01CFE17D400FE1A80 /* AppDelegate.m */,
-				27A74ED21CFE17D400FE1A80 /* ViewController.h */,
-				27A74ED31CFE17D400FE1A80 /* ViewController.m */,
 				27A74ED51CFE17D500FE1A80 /* Main.storyboard */,
 				27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */,
+				27A74F051CFE3A7600FE1A80 /* ListTableViewController.h */,
+				27A74F061CFE3A7600FE1A80 /* ListTableViewController.m */,
+				2754BF761D00CE4100B6A1D1 /* NewWebsiteTableViewController.h */,
+				2754BF771D00CE4100B6A1D1 /* NewWebsiteTableViewController.m */,
+				27A74F021CFE1EC700FE1A80 /* WebsiteTableViewController.h */,
+				27A74F031CFE1EC700FE1A80 /* WebsiteTableViewController.m */,
 				27A74EDD1CFE17D600FE1A80 /* LaunchScreen.storyboard */,
 				27A74EE01CFE17D600FE1A80 /* Info.plist */,
 				27A74ED81CFE17D600FE1A80 /* WebWatcher.xcdatamodeld */,
@@ -210,6 +220,15 @@
 				TargetAttributes = {
 					27A74EC81CFE17D400FE1A80 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = V9CEBD9ZBT;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					27A74EE41CFE17DA00FE1A80 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -273,10 +292,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27A74ED41CFE17D400FE1A80 /* ViewController.m in Sources */,
+				27A74F041CFE1EC700FE1A80 /* WebsiteTableViewController.m in Sources */,
 				27A74ED11CFE17D400FE1A80 /* AppDelegate.m in Sources */,
 				27A74ECE1CFE17D400FE1A80 /* main.m in Sources */,
 				27A74EDA1CFE17D600FE1A80 /* WebWatcher.xcdatamodeld in Sources */,
+				2754BF781D00CE4100B6A1D1 /* NewWebsiteTableViewController.m in Sources */,
+				27A74F071CFE3A7600FE1A80 /* ListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +523,7 @@
 				27A74EFB1CFE17DB00FE1A80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		27A74EFC1CFE17DB00FE1A80 /* Build configuration list for PBXNativeTarget "WebWatcherTests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +532,7 @@
 				27A74EFE1CFE17DB00FE1A80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		27A74EFF1CFE17DB00FE1A80 /* Build configuration list for PBXNativeTarget "WebWatcherUITests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +541,7 @@
 				27A74F011CFE17DB00FE1A80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
