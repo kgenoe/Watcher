@@ -10,13 +10,18 @@
 
 @interface ListTableViewController ()
 
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x006600) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
+
 @end
 
 @implementation ListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     //If the watchedItems array does not exist, create/save it
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -28,11 +33,23 @@
     }
     
     //used by detail view controller
-    self.detailViewController = (WebsiteTableViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    //self.detailViewController = (WebsiteTableViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
-    //set navcontroller title
-    [self.navigationController.navigationBar.topItem setTitle:@"Watched Websites"];
     
+    //set navcontroller title image
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavBarTitle"]];
+    
+    //Create custom back button for returning to this view
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] init];
+    newBackButton.title = @"Back";
+    self.navigationController.navigationBar.topItem.backBarButtonItem = newBackButton;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    //Reloads the tableview (intended for when returning from adding a new website)
+    [[self tableView]reloadData];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,88 +58,6 @@
 }
 
 
-
-#pragma mark - Adding Watched Websites
-- (IBAction)addWatchedWebite:(id)sender {
-    
-    UIAlertController* addWatchedWebiteAlert = [UIAlertController alertControllerWithTitle:@"New Watched Website"
-                                                                                 message:@"Enter the URL of the website you would like to monitor for changes (must start with http:// or https://)"
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-    //Add the text field to the alert box
-    [addWatchedWebiteAlert addTextFieldWithConfigurationHandler:^(UITextField *textField)
-     {
-         //customize the placeholder text of the textfield
-         textField.text = @"https://";
-         textField.placeholder = NSLocalizedString(@"https://...", @"https://...");
-         textField.keyboardType = UIKeyboardTypeURL;
-         [textField addTarget:self action:@selector(websiteFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-         
-     }];
-    
-    //Create the alert action that will cancel the alert
-    UIAlertAction* cancelAddAction = [UIAlertAction actionWithTitle:@"Cancel"
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * action) {}];
-    
-    //Create the alert action that will add the watched website to NSUserDefaults
-    UIAlertAction* addSiteAction = [UIAlertAction actionWithTitle:@"Add"
-                                                            style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {
-                                                              UITextField *textField = [[addWatchedWebiteAlert textFields] firstObject];
-                                                              NSString *text = [textField text];
-                                                              [self saveNewWatchedWebsite:text];
-                                                              [[self tableView]reloadData];
-                                                          }];
-    //Attach the add website action to the alert
-    [addWatchedWebiteAlert addAction:cancelAddAction];
-    [addWatchedWebiteAlert addAction:addSiteAction];
-    
-    //present the alert to the users
-    [self presentViewController:addWatchedWebiteAlert animated:YES completion:nil];
-}
-
-- (void) saveNewWatchedWebsite:(NSString *) url {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-    
-    //create the new watched item
-    NSMutableArray *watchedItem = [[NSMutableArray alloc]initWithObjects:url, //add the url
-                            [NSNumber numberWithInteger:10],                  //add default refresh (10 min)
-                            nil];
-    
-    //add the new watched itme to watchedItemsArray and save to NSUserDefaults
-    [watchedItemsArray addObject:watchedItem];
-    [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-    [defaults synchronize];
-}
-
-- (void) websiteFieldDidChange:(UITextField *)sender {
-    UIAlertController *alertController = (UIAlertController *)self.presentedViewController;
-    if (alertController)
-    {
-        UIAlertAction *addAction = alertController.actions.lastObject;
-        UITextField *websiteField = alertController.textFields.firstObject;
-        NSString *websiteURL = [websiteField text];
-        
-        //Only accept strings that start with http:// or https://
-        if ([websiteURL length]>=8) {
-            if([[websiteURL substringToIndex:8]isEqualToString:@"https://"])
-                addAction.enabled = true;
-            else
-                addAction.enabled = false;
-        }
-        else if ([websiteURL length]>=7) {
-            if([[websiteURL substringToIndex:7]isEqualToString:@"http://"])
-                addAction.enabled = true;
-            else
-                addAction.enabled = false;
-        }
-        else
-            addAction.enabled = false;
-    }
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -130,6 +65,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //set # of rows to be # of watched websites
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
     return [watchedItemsArray count];
@@ -148,19 +84,28 @@
     //Configure the cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"websiteCell" forIndexPath:indexPath];
     UILabel *cellLabel = (UILabel *)[cell viewWithTag:100];
-    cellLabel.text = urlString;
+    cellLabel.text = [NSString stringWithFormat:@"  %@",urlString];
+    
+    //set label outline
+    UIColor *lightBlueColor = [UIColor colorWithRed:51/255.0 green:153/255.0 blue:255/255.0 alpha:1.0];
+    [[cellLabel layer] masksToBounds];
+    [[cellLabel layer] setBorderColor:[lightBlueColor CGColor]];
+    [[cellLabel layer] setBorderWidth:1.5];
+    [[cellLabel layer] setCornerRadius:5];
     
     return cell;
 }
 
-
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    //allow editing to delete watched items
     return YES;
 }
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //Deleting a tableView row
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         // Delete the data from the NSUserDefaults data array
@@ -172,34 +117,28 @@
         
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-        
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 
-- (void) deleteItem:(id)sender {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   }
+    //Row selected, push that watched item's index to the soon-to-be-displayed WebsiteTableViewController view
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    WebsiteTableViewController *controller = [storyBoard instantiateViewControllerWithIdentifier:@"WebsiteTableViewController"];
+    controller.itemIndex = [NSNumber numberWithInteger:indexPath.row];
+    [[self navigationController] pushViewController:controller animated:YES];
+}
 
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    //Any custom setup of the new view that is necessary
     
-    if ([[segue identifier] isEqualToString:@"showWebsiteDetail"]) {
-        WebsiteTableViewController *controller = (WebsiteTableViewController *)[[segue destinationViewController] topViewController];
-        
-        //controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+    if([[segue identifier] isEqualToString:@"addWebsiteSegue"]) {
 
-        //controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-        //controller.navigationItem.leftItemsSupplementBackButton = YES;
+    }
+    
+    if([[segue identifier] isEqualToString:@"infoSegue"]) {
         
-        //#warning This may need to be changed using comment at bottom of this link http://stackoverflow.com/questions/26278730/how-to-get-indexpath-in-prepareforsegue
-        
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        controller.itemIndex = [NSNumber numberWithInteger:indexPath.row];
     }
 }
 

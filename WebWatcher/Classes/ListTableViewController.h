@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewWebsiteTableViewController.h"
 #import "WebsiteTableViewController.h"
 
-@interface ListTableViewController : UITableViewController 
+@interface ListTableViewController : UITableViewController
 
 @property (strong, nonatomic) WebsiteTableViewController *detailViewController;
-
-
-- (IBAction)addWatchedWebite:(id)sender;
 
 @end

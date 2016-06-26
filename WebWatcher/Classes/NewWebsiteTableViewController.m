@@ -17,11 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //connect the save button to the top right navbar item
+    saveWebsiteButton = self.navigationController.navigationItem.rightBarButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,28 +33,41 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell;
     
     if(indexPath.row == 0){
         //Website name entry
+        
         cell  = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
         urlTextField = (UITextField *)[cell viewWithTag:200];
         [urlTextField setText:@"https://"];
-        [urlTextField addTarget:self action:@selector(urlTextFieldDidChange) forControlEvents:UIControlEventAllEvents];
+        [urlTextField addTarget:self action:@selector(urlTextFieldDidChange) forControlEvents:UIControlEventAllEvents] ;
+        
+        //set textfield outline
+        UIColor *lightBlueColor = [UIColor colorWithRed:51/255.0 green:153/255.0 blue:255/255.0 alpha:1.0];
+        [[urlTextField layer] masksToBounds];
+        [[urlTextField layer] setBorderColor:[lightBlueColor CGColor]];
+        [[urlTextField layer] setBorderWidth:1.5];
+        [[urlTextField layer] setCornerRadius:5];
     }
     else if(indexPath.row == 1){
-        //Website entry help
-        cell  = [tableView dequeueReusableCellWithIdentifier:@"labelCell" forIndexPath:indexPath];
-        UILabel *cellLabel = (UILabel *)[cell viewWithTag:100];
-        [cellLabel setText:@"(must start with http:// or https://)"];
-        [cellLabel setTextAlignment:NSTextAlignmentCenter];
+        //Website URL description
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"textviewCell" forIndexPath:indexPath];
+        UITextView *cellTextView = (UITextView *)[cell viewWithTag:100];
+        [cellTextView setText:@"URL of the Watched Website. You'll be alerted when any changes are made to the HTML.\n(URL must start with http:// or https://)"];
+        [cellTextView setTextAlignment:NSTextAlignmentCenter];
+        [cellTextView setFont:[UIFont fontWithName:@"Avenir Book" size:15.0]];
     }
     else if(indexPath.row == 2){
-        //Notification count
+        //Notification Count & Controlling Stepper
+        //(# of notifications sent for this item)
+        
         cell  = [tableView dequeueReusableCellWithIdentifier:@"stepperCell" forIndexPath:indexPath];
         notifCountLabel = (UILabel *)[cell viewWithTag:100];
         notifCountStepper = (UIStepper *)[cell viewWithTag:200];
@@ -69,16 +79,28 @@
         notifCountStepper.minimumValue = 1;
         notifCountStepper.maximumValue = 10;
         [notifCountStepper addTarget:self action:@selector(updateNotifCount) forControlEvents:UIControlEventAllEvents];
+        
+        //format label
+        [notifCountLabel setText:[NSString stringWithFormat:@"Alerts Per Change: %lu",(long)notifCountStepper.value]];
     }
     else if(indexPath.row == 3){
-        //Description of Notification count
+        //Notification Count Description label
+        
         cell  = [tableView dequeueReusableCellWithIdentifier:@"labelCell" forIndexPath:indexPath];
         UILabel *cellLabel = (UILabel *)[cell viewWithTag:100];
-        [cellLabel setText:@"The number of times you'll be notified this website changes"];
         [cellLabel setTextAlignment:NSTextAlignmentCenter];
+        
+        //compressed screen width
+        if(self.view.frame.size.width == 320)
+            [cellLabel setText:@"Number of times you'll get alerted"];
+        else
+            [cellLabel setText:@"Number of times you'll get alerted about a change"];
+
     }
     else if(indexPath.row == 4){
-        //Notification interval
+        //Notification Interval & Controlling Stepper
+        //(time between notifications for this item)
+        
         cell  = [tableView dequeueReusableCellWithIdentifier:@"stepperCell" forIndexPath:indexPath];
         notifIntervalLabel = (UILabel *)[cell viewWithTag:100];
         notifIntervalStepper = (UIStepper *)[cell viewWithTag:200];
@@ -90,26 +112,35 @@
         notifIntervalStepper.minimumValue = 1;
         notifIntervalStepper.maximumValue = 60;
         [notifIntervalStepper addTarget:self action:@selector(updateNotifInterval) forControlEvents:UIControlEventAllEvents];
+        
+        //compressed screen width
+        if(self.view.frame.size.width == 320)
+            [notifIntervalLabel setText:[NSString stringWithFormat:@"Time Between Alerts: %lum",(long)notifIntervalStepper.value]];
+        else
+            [notifIntervalLabel setText:[NSString stringWithFormat:@"Time Between Alerts: %lu min.",(long)notifIntervalStepper.value]];
     }
     else if(indexPath.row == 5){
-        //Description of Notification interval
+        //Notification Interval Description label
+        
         cell  = [tableView dequeueReusableCellWithIdentifier:@"labelCell" forIndexPath:indexPath];
         UILabel *cellLabel = (UILabel *)[cell viewWithTag:100];
-        [cellLabel setText:@"The time between being notified on changes"];
+        [cellLabel setText:@"Time between each alert about a change"];
         [cellLabel setTextAlignment:NSTextAlignmentCenter];
     }
-    else if(indexPath.row == 6){
-        //Button cell
-        cell  = [tableView dequeueReusableCellWithIdentifier:@"buttonCell" forIndexPath:indexPath];
-        saveWebsiteButton = (UIButton *)[cell viewWithTag:100];
-    }
-    
-    
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //override the hight for the url entry description cell (index 1)
+    if (indexPath.row == 1)
+        return 90.0;
+    else
+        return 44.0;
+    
+}
 
-//Called when the urlText field changes
+// Maintains the required http:// or https:// at the start of a URL
 - (void) urlTextFieldDidChange{
     
     NSString *websiteURL = [urlTextField text];
@@ -129,19 +160,22 @@
     }
     else
         saveWebsiteButton.enabled = false;
-    
 }
 
-//updates the stepper label on count change
+//Updates the notifCountLabel on notifCountStepper value change
 - (void) updateNotifCount{
     //update the stepper text
-    [notifCountLabel setText:[NSString stringWithFormat:@"Number of notifications: %lu",(long)notifCountStepper.value]];
+    [notifCountLabel setText:[NSString stringWithFormat:@"Alerts Per Change: %lu",(long)notifCountStepper.value]];
 }
 
-//updates the stepper label on interval change
+//Updates the notifIntervalLabel on notifIntervalStepper value change
 - (void) updateNotifInterval{
     //update the stepper text
-    [notifIntervalLabel setText:[NSString stringWithFormat:@"Minutes between notifications: %lumin.",(long)notifIntervalStepper.value]];
+    //compressed screen width
+    if(self.view.frame.size.width == 320)
+        [notifIntervalLabel setText:[NSString stringWithFormat:@"Time Between Alerts: %lum",(long)notifIntervalStepper.value]];
+    else
+        [notifIntervalLabel setText:[NSString stringWithFormat:@"Time Between Alerts: %lu min.",(long)notifIntervalStepper.value]];
 }
 
 //Save this website to NSUserDefaults and exit to main
@@ -152,9 +186,7 @@
     
     //get the necessary data
     NSString *urlString = [urlTextField text];
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSError *error = nil;
-    NSString *htmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    NSString *htmlString = @"emptyHTML";
     NSInteger notifCount = [notifCountStepper value];
     NSInteger notifInterval = [notifIntervalStepper value];
     
@@ -169,8 +201,46 @@
     [watchedItemsArray addObject:watchedItem];
     [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
     [defaults synchronize];
-
     
+    //Start async task to retrieve page html
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error == nil){
+            //get the url from the response
+            NSString *urlString = [[response URL]absoluteString];
+            //get the html from the data
+            NSString *htmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            //find the urlString in the watched items
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
+            for (int i = 0; i < [watchedItemsArray count]; i++) {
+                
+                NSMutableArray *watchedItem = [[watchedItemsArray objectAtIndex:i]mutableCopy];
+                NSString *watchedURLString = [watchedItem objectAtIndex:0];
+                //find the url for this response (may be a subset because of trailing /)
+                if ([urlString containsString:watchedURLString]) {
+                    //add HTML to this watched item
+                    [watchedItem replaceObjectAtIndex:1 withObject:htmlString];
+                    [watchedItemsArray replaceObjectAtIndex:i withObject:watchedItem];
+                    [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
+                    [defaults synchronize];
+                    break;
+                }
+            }
+        }
+        else{
+            //NSLog(@"%@ %@",error,[error userInfo]);
+        }
+    }];
+    
+    [task resume];
+    [self dismissViewControllerAnimated:YES completion:Nil];
+}
+
+//Cancels adding a website, exits to main
+- (IBAction)cancelAddingWebsite:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:Nil];
 }
 
 

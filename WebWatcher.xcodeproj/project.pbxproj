@@ -11,13 +11,13 @@
 		27A74ECE1CFE17D400FE1A80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ECD1CFE17D400FE1A80 /* main.m */; };
 		27A74ED11CFE17D400FE1A80 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ED01CFE17D400FE1A80 /* AppDelegate.m */; };
 		27A74ED71CFE17D500FE1A80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A74ED51CFE17D500FE1A80 /* Main.storyboard */; };
-		27A74EDA1CFE17D600FE1A80 /* WebWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ED81CFE17D600FE1A80 /* WebWatcher.xcdatamodeld */; };
 		27A74EDC1CFE17D600FE1A80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */; };
 		27A74EDF1CFE17D600FE1A80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A74EDD1CFE17D600FE1A80 /* LaunchScreen.storyboard */; };
 		27A74EEA1CFE17DA00FE1A80 /* WebWatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74EE91CFE17DA00FE1A80 /* WebWatcherTests.m */; };
 		27A74EF51CFE17DB00FE1A80 /* WebWatcherUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74EF41CFE17DB00FE1A80 /* WebWatcherUITests.m */; };
 		27A74F041CFE1EC700FE1A80 /* WebsiteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74F031CFE1EC700FE1A80 /* WebsiteTableViewController.m */; };
 		27A74F071CFE3A7600FE1A80 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74F061CFE3A7600FE1A80 /* ListTableViewController.m */; };
+		27F804871D04C68800B49C02 /* InfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F804861D04C68800B49C02 /* InfoTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,6 @@
 		27A74ECF1CFE17D400FE1A80 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		27A74ED01CFE17D400FE1A80 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		27A74ED61CFE17D500FE1A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		27A74ED91CFE17D600FE1A80 /* WebWatcher.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WebWatcher.xcdatamodel; sourceTree = "<group>"; };
 		27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27A74EDE1CFE17D600FE1A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27A74EE01CFE17D600FE1A80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +58,8 @@
 		27A74F031CFE1EC700FE1A80 /* WebsiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebsiteTableViewController.m; path = Classes/WebsiteTableViewController.m; sourceTree = "<group>"; };
 		27A74F051CFE3A7600FE1A80 /* ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListTableViewController.h; path = Classes/ListTableViewController.h; sourceTree = "<group>"; };
 		27A74F061CFE3A7600FE1A80 /* ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListTableViewController.m; path = Classes/ListTableViewController.m; sourceTree = "<group>"; };
+		27F804851D04C68800B49C02 /* InfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoTableViewController.h; path = Classes/InfoTableViewController.h; sourceTree = "<group>"; };
+		27F804861D04C68800B49C02 /* InfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoTableViewController.m; path = Classes/InfoTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +87,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2755F0D71D20592600E67C4E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				27A74ECF1CFE17D400FE1A80 /* AppDelegate.h */,
+				27A74ED01CFE17D400FE1A80 /* AppDelegate.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		2755F0D81D20594700E67C4E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				27A74F051CFE3A7600FE1A80 /* ListTableViewController.h */,
+				27A74F061CFE3A7600FE1A80 /* ListTableViewController.m */,
+				2754BF761D00CE4100B6A1D1 /* NewWebsiteTableViewController.h */,
+				2754BF771D00CE4100B6A1D1 /* NewWebsiteTableViewController.m */,
+				27A74F021CFE1EC700FE1A80 /* WebsiteTableViewController.h */,
+				27A74F031CFE1EC700FE1A80 /* WebsiteTableViewController.m */,
+				27F804851D04C68800B49C02 /* InfoTableViewController.h */,
+				27F804861D04C68800B49C02 /* InfoTableViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2755F0D91D205BA800E67C4E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				27A74ED51CFE17D500FE1A80 /* Main.storyboard */,
+				27A74EDD1CFE17D600FE1A80 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		27A74EC01CFE17D300FE1A80 = {
 			isa = PBXGroup;
 			children = (
@@ -109,20 +143,11 @@
 		27A74ECB1CFE17D400FE1A80 /* WebWatcher */ = {
 			isa = PBXGroup;
 			children = (
-				27A74ECF1CFE17D400FE1A80 /* AppDelegate.h */,
-				27A74ED01CFE17D400FE1A80 /* AppDelegate.m */,
-				27A74ED51CFE17D500FE1A80 /* Main.storyboard */,
-				27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */,
-				27A74F051CFE3A7600FE1A80 /* ListTableViewController.h */,
-				27A74F061CFE3A7600FE1A80 /* ListTableViewController.m */,
-				2754BF761D00CE4100B6A1D1 /* NewWebsiteTableViewController.h */,
-				2754BF771D00CE4100B6A1D1 /* NewWebsiteTableViewController.m */,
-				27A74F021CFE1EC700FE1A80 /* WebsiteTableViewController.h */,
-				27A74F031CFE1EC700FE1A80 /* WebsiteTableViewController.m */,
-				27A74EDD1CFE17D600FE1A80 /* LaunchScreen.storyboard */,
-				27A74EE01CFE17D600FE1A80 /* Info.plist */,
-				27A74ED81CFE17D600FE1A80 /* WebWatcher.xcdatamodeld */,
+				2755F0D71D20592600E67C4E /* Application */,
+				2755F0D91D205BA800E67C4E /* Storyboards */,
+				2755F0D81D20594700E67C4E /* Controllers */,
 				27A74ECC1CFE17D400FE1A80 /* Supporting Files */,
+				27A74EDB1CFE17D600FE1A80 /* Assets.xcassets */,
 			);
 			path = WebWatcher;
 			sourceTree = "<group>";
@@ -130,6 +155,7 @@
 		27A74ECC1CFE17D400FE1A80 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				27A74EE01CFE17D600FE1A80 /* Info.plist */,
 				27A74ECD1CFE17D400FE1A80 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -294,8 +320,8 @@
 			files = (
 				27A74F041CFE1EC700FE1A80 /* WebsiteTableViewController.m in Sources */,
 				27A74ED11CFE17D400FE1A80 /* AppDelegate.m in Sources */,
+				27F804871D04C68800B49C02 /* InfoTableViewController.m in Sources */,
 				27A74ECE1CFE17D400FE1A80 /* main.m in Sources */,
-				27A74EDA1CFE17D600FE1A80 /* WebWatcher.xcdatamodeld in Sources */,
 				2754BF781D00CE4100B6A1D1 /* NewWebsiteTableViewController.m in Sources */,
 				27A74F071CFE3A7600FE1A80 /* ListTableViewController.m in Sources */,
 			);
@@ -442,8 +468,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WebWatcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.3;
+				VALID_ARCHS = "armv7s arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -453,8 +482,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WebWatcher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.3;
+				VALID_ARCHS = "armv7s arm64 armv7";
 			};
 			name = Release;
 		};
@@ -544,19 +576,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		27A74ED81CFE17D600FE1A80 /* WebWatcher.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				27A74ED91CFE17D600FE1A80 /* WebWatcher.xcdatamodel */,
-			);
-			currentVersion = 27A74ED91CFE17D600FE1A80 /* WebWatcher.xcdatamodel */;
-			path = WebWatcher.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 27A74EC11CFE17D300FE1A80 /* Project object */;
 }

@@ -22,4 +22,8 @@
 //This is an NSNumber so the object id can be used by splitviewcontroller
 @property NSNumber *itemIndex;
 
+- (IBAction)openInSafari:(id)sender;
+- (IBAction)showDeletePrompt:(id)sender;
+
+
 @end

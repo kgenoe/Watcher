@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewWebsiteTableViewController : UITableViewController {
+@interface NewWebsiteTableViewController : UITableViewController{
     
     UITextField *urlTextField;
     
@@ -18,15 +18,14 @@
     UILabel *notifIntervalLabel;
     UIStepper *notifIntervalStepper;
     
-    UIButton *saveWebsiteButton;
+    UIBarButtonItem *saveWebsiteButton;
     
-    /*notification count w/ stepper
-    - explanation of notification count
-    - notification interval w/ stepper
-    - explanation of notification interval
-    - "add to watch list" button*/
+    NSMutableData *responseData;
 }
 
+
 - (IBAction)saveWebsiteToWatchedWebsites:(id)sender;
+
+- (IBAction)cancelAddingWebsite:(id)sender;
 
 @end
