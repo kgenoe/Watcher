@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		271E764E1D7346CF00E27061 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 271E764D1D7346CF00E27061 /* README */; };
 		2754BF781D00CE4100B6A1D1 /* NewWebsiteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2754BF771D00CE4100B6A1D1 /* NewWebsiteTableViewController.m */; };
 		27A74ECE1CFE17D400FE1A80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ECD1CFE17D400FE1A80 /* main.m */; };
 		27A74ED11CFE17D400FE1A80 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A74ED01CFE17D400FE1A80 /* AppDelegate.m */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		271E764D1D7346CF00E27061 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = SOURCE_ROOT; };
 		2754BF761D00CE4100B6A1D1 /* NewWebsiteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewWebsiteTableViewController.h; path = Classes/NewWebsiteTableViewController.h; sourceTree = "<group>"; };
 		2754BF771D00CE4100B6A1D1 /* NewWebsiteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewWebsiteTableViewController.m; path = Classes/NewWebsiteTableViewController.m; sourceTree = "<group>"; };
 		27A74EC91CFE17D400FE1A80 /* WebWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 		27A74ECC1CFE17D400FE1A80 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				271E764D1D7346CF00E27061 /* README */,
 				27A74EE01CFE17D600FE1A80 /* Info.plist */,
 				27A74ECD1CFE17D400FE1A80 /* main.m */,
 			);
@@ -241,7 +244,7 @@
 		27A74EC11CFE17D300FE1A80 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Kyle Genoe";
 				TargetAttributes = {
 					27A74EC81CFE17D400FE1A80 = {
@@ -291,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				271E764E1D7346CF00E27061 /* README in Resources */,
 				27A74EDF1CFE17D600FE1A80 /* LaunchScreen.storyboard in Resources */,
 				27A74EDC1CFE17D600FE1A80 /* Assets.xcassets in Resources */,
 				27A74ED71CFE17D500FE1A80 /* Main.storyboard in Resources */,
@@ -392,8 +396,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -437,8 +443,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -471,7 +479,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos9.3;
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7s arm64 armv7";
 			};
 			name = Debug;
@@ -485,7 +493,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.genoe.WebWatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos9.3;
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7s arm64 armv7";
 			};
 			name = Release;
