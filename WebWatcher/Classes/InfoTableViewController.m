@@ -28,10 +28,6 @@
     [self.navigationController.navigationBar setTitleTextAttributes:navTitleAttr];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
@@ -42,7 +38,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
@@ -80,7 +75,6 @@
         return 44.0;
     }
 }
-
 
 
 //Cancels adding a website, exits to main

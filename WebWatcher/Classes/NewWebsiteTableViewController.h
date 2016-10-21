@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebsiteMonitor.h"
 
 @interface NewWebsiteTableViewController : UITableViewController{
     

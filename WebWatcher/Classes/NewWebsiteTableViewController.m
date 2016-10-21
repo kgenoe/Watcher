@@ -171,7 +171,6 @@
 //Updates the notifIntervalLabel on notifIntervalStepper value change
 - (void) updateNotifInterval{
     //update the stepper text
-    //compressed screen width
     if(self.view.frame.size.width == 320)
         [notifIntervalLabel setText:[NSString stringWithFormat:@"Time Between Alerts: %lum",(long)notifIntervalStepper.value]];
     else
@@ -197,44 +196,16 @@
                                    [NSNumber numberWithInteger:notifInterval],//time between notifs
                                    nil];
     
-    //add the new watched itme to watchedItemsArray and save to NSUserDefaults
+    //add the new watched item to watchedItemsArray and save to NSUserDefaults
     [watchedItemsArray addObject:watchedItem];
     [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
     [defaults synchronize];
     
-    //Start async task to retrieve page html
     NSURL *url = [NSURL URLWithString:urlString];
-    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if(error == nil){
-            //get the url from the response
-            NSString *urlString = [[response URL]absoluteString];
-            //get the html from the data
-            NSString *htmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            
-            //find the urlString in the watched items
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-            for (int i = 0; i < [watchedItemsArray count]; i++) {
-                
-                NSMutableArray *watchedItem = [[watchedItemsArray objectAtIndex:i]mutableCopy];
-                NSString *watchedURLString = [watchedItem objectAtIndex:0];
-                //find the url for this response (may be a subset because of trailing /)
-                if ([urlString containsString:watchedURLString]) {
-                    //add HTML to this watched item
-                    [watchedItem replaceObjectAtIndex:1 withObject:htmlString];
-                    [watchedItemsArray replaceObjectAtIndex:i withObject:watchedItem];
-                    [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-                    [defaults synchronize];
-                    break;
-                }
-            }
-        }
-        else{
-            //NSLog(@"%@ %@",error,[error userInfo]);
-        }
-    }];
     
-    [task resume];
+    WebsiteMonitor *websiteMonitor = [[WebsiteMonitor alloc] init];
+    [websiteMonitor getInitialWatchedWebsiteStateWithURL:url];
+    
     [self dismissViewControllerAnimated:YES completion:Nil];
 }
 

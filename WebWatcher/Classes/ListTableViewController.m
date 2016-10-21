@@ -32,10 +32,7 @@ alpha:1.0]
         [defaults synchronize];
     }
     
-    //used by detail view controller
-    //self.detailViewController = (WebsiteTableViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-    
-    
+
     //set navcontroller title image
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavBarTitle"]];
     
@@ -50,11 +47,6 @@ alpha:1.0]
     //Reloads the tableview (intended for when returning from adding a new website)
     [[self tableView]reloadData];
 
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -96,13 +88,10 @@ alpha:1.0]
     return cell;
 }
 
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    //allow editing to delete watched items
     return YES;
 }
 
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //Deleting a tableView row
@@ -127,19 +116,6 @@ alpha:1.0]
     WebsiteTableViewController *controller = [storyBoard instantiateViewControllerWithIdentifier:@"WebsiteTableViewController"];
     controller.itemIndex = [NSNumber numberWithInteger:indexPath.row];
     [[self navigationController] pushViewController:controller animated:YES];
-}
-
-#pragma mark - Navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    //Any custom setup of the new view that is necessary
-    
-    if([[segue identifier] isEqualToString:@"addWebsiteSegue"]) {
-
-    }
-    
-    if([[segue identifier] isEqualToString:@"infoSegue"]) {
-        
-    }
 }
 
 
