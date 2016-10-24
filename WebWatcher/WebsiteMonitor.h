@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebsiteStore.h"
 
 @interface WebsiteMonitor : NSObject
 

@@ -18,6 +18,7 @@
 
 @implementation WebsiteMonitor
 
+
 - (void) getInitialWatchedWebsiteStateWithURL:(NSURL *)url{
     //Start async task to retrieve page html
     NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -28,19 +29,16 @@
             NSString *htmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
             //find the urlString in the watched items
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-            for (int i = 0; i < [watchedItemsArray count]; i++) {
+            NSMutableArray *watchedItemsArray = [[WebsiteStore sharedInstance] store];
+            for (int i = 0; i < [[WebsiteStore sharedInstance] itemCount]; i++) {
                 
                 NSMutableArray *watchedItem = [[watchedItemsArray objectAtIndex:i]mutableCopy];
                 NSString *watchedURLString = [watchedItem objectAtIndex:0];
                 //find the url for this response (may be a subset because of trailing /)
                 if ([urlString containsString:watchedURLString]) {
-                    //add HTML to this watched item
-                    [watchedItem replaceObjectAtIndex:1 withObject:htmlString];
-                    [watchedItemsArray replaceObjectAtIndex:i withObject:watchedItem];
-                    [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-                    [defaults synchronize];
+                    //add fetched HTML to this watched item
+                    WebsiteStore *store = [WebsiteStore sharedInstance];
+                    [store updateItemAtIndex:i withNewHTMLString:htmlString];
                     break;
                 }
             }
@@ -61,7 +59,7 @@
         //Start async task to retrieve page html
         NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if(error == nil)
-                [self handlResponse:response withData:data withBackgroundCompletionHandler:completionHandler];
+                [self handleResponse:response withData:data withBackgroundCompletionHandler:completionHandler];
             else{
                 NSLog(@"No html exists for index %d",i);
             }
@@ -77,7 +75,7 @@
 }
 
 
-- (void)handlResponse: (NSURLResponse *)response withData: (NSData *)data withBackgroundCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+- (void)handleResponse: (NSURLResponse *)response withData: (NSData *)data withBackgroundCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
     
     //get the url from the response
     NSString *urlString = [[response URL] absoluteString];
@@ -85,8 +83,7 @@
     NSString *fetchedHTMLString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     //find the watchedItem with the matching url string
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
+    NSMutableArray *watchedItemsArray = [[self getWatchedItemsArray] mutableCopy];
     NSMutableArray *watchedItem;
     NSInteger index = -1;
     for (int i = 0; i < [watchedItemsArray count]; i++) {
@@ -113,23 +110,19 @@
         //html not previously set, assign it the newhtml but dont send notification of change
         
         //replace the nil/blank html text with the html just recieved
-        [watchedItem replaceObjectAtIndex:1 withObject:fetchedHTMLString];
-        [watchedItemsArray replaceObjectAtIndex:index withObject:watchedItem];
-        [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-        [defaults synchronize];
+        WebsiteStore *store = [WebsiteStore sharedInstance];
+        [store updateItemAtIndex:index withNewHTMLString:fetchedHTMLString];
         
         //notify handler that new data was successfully fetched
         completionHandler(UIBackgroundFetchResultNewData);
     }
     else if (![fetchedHTMLString isEqualToString:oldHTMLString]) {
-        //There have been changes in the html since the last check
-        //NSLog(@"There are changes! for index %lu",(long)index);
         
-        //update changes in NSUserDefaults
-        [watchedItem replaceObjectAtIndex:1 withObject:fetchedHTMLString];
-        [watchedItemsArray replaceObjectAtIndex:index withObject:watchedItem];
-        [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-        [defaults synchronize];
+        //There have been changes in the html since the last check
+        WebsiteStore *store = [WebsiteStore sharedInstance];
+        
+        //update the store with the new html
+        [store updateItemAtIndex:index withNewHTMLString:fetchedHTMLString];
         
         //schedule notifications for this item
         [self scheduleNotificationsForWatchedItemAtIndex:index];
@@ -146,13 +139,12 @@
 
 //Schedules the notifications for a website after changes have been detected
 - (void)scheduleNotificationsForWatchedItemAtIndex:(NSInteger)index{
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-    NSMutableArray *watchedWebsite = [[watchedItemsArray objectAtIndex:index]mutableCopy];
-    NSString *urlString = [watchedWebsite objectAtIndex:0];
-    NSInteger notifCount = [[watchedWebsite objectAtIndex:2]integerValue];
-    NSInteger notifInterval = [[watchedWebsite objectAtIndex:3]integerValue];
+  
+    //get item components from store
+    WebsiteStore *store = [WebsiteStore sharedInstance];
+    NSString *urlString = [store urlOfItemWithIndex:index];
+    NSInteger notifCount = [store notifCountOfItemWithIndex:index];
+    NSInteger notifInterval = [store notifIntervalOfItemWithIndex:index];
     
     for(int i = 0;i < notifCount; i++){
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];

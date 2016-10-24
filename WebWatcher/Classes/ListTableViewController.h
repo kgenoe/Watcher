@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebsiteStore.h"
 #import "NewWebsiteTableViewController.h"
 #import "WebsiteTableViewController.h"
 

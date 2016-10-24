@@ -22,16 +22,9 @@ alpha:1.0]
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //If the watchedItems array does not exist, create/save it
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-    if (watchedItemsArray == nil){
-        watchedItemsArray = [[NSMutableArray alloc]init];
-        [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-        [defaults synchronize];
-    }
-    
+
+    //create store for websites if it doesn't already exist
+    [WebsiteStore sharedInstance];
 
     //set navcontroller title image
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavBarTitle"]];
@@ -58,20 +51,13 @@ alpha:1.0]
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //set # of rows to be # of watched websites
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-    return [watchedItemsArray count];
+    return [[WebsiteStore sharedInstance] itemCount];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //get the list of all watched items' data
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *watchedItemsArray = [defaults arrayForKey:@"watchedItems"];
-    //get the data from the one watched website
-    NSArray *watchedWebsite = [watchedItemsArray objectAtIndex:indexPath.row];
     //get the url from the watched website data
-    NSString *urlString = [watchedWebsite objectAtIndex:0];
+    NSString *urlString = [[WebsiteStore sharedInstance] urlOfItemWithIndex:indexPath.row];
     
     //Configure the cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"websiteCell" forIndexPath:indexPath];
@@ -97,12 +83,8 @@ alpha:1.0]
     //Deleting a tableView row
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        // Delete the data from the NSUserDefaults data array
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-        [watchedItemsArray removeObjectAtIndex:indexPath.row]; //delete the object
-        [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-        [defaults synchronize];
+        // Delete the data from the store
+        [[WebsiteStore sharedInstance] removeItemAtIndex:indexPath.row];
         
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];

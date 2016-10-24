@@ -28,14 +28,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *watchedItemsArray = [defaults arrayForKey:@"watchedItems"];
-    
-    if([watchedItemsArray count] == 0)
+
+    if([[WebsiteStore sharedInstance] itemCount] == 0)
         return [tableView dequeueReusableCellWithIdentifier:@"textFieldCell" forIndexPath:indexPath];
 
-    
-    NSArray *watchedWebsite = [watchedItemsArray objectAtIndex:[_itemIndex integerValue]];
+    NSArray *watchedWebsite = [[WebsiteStore sharedInstance] itemWithIndex:[_itemIndex integerValue]];
+
     //Assumed that watchedWebsite array is completely populated (will have been on creation)
     
     if (indexPath.section == 0) {
@@ -171,15 +169,11 @@
         [urlTextField setText:@"https://"];
     }
     
-    //push changes to NSUserDefaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-    NSMutableArray *watchedWebsite = [[watchedItemsArray objectAtIndex:[_itemIndex integerValue]]mutableCopy];
-    [watchedWebsite replaceObjectAtIndex:0 withObject:[urlTextField text]];
-    [watchedItemsArray replaceObjectAtIndex:[_itemIndex integerValue] withObject:watchedWebsite];
-    [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-    [defaults synchronize];
-    
+    //update the new url string value in the store
+    NSInteger itemIndex = [_itemIndex integerValue];
+    NSString *urlString = [urlTextField text];
+    WebsiteStore *store = [WebsiteStore sharedInstance];
+    [store updateItemAtIndex:itemIndex withNewURLString:urlString];
 }
 
 //Updates the notifCountLabel/NSUserDefaults on notifCountStepper value change
@@ -188,14 +182,11 @@
     //update the stepper text
     [notifCountLabel setText:[NSString stringWithFormat:@"Alerts Per Change: %lu",(long)notifCountStepper.value]];
     
-    //update the stepper value in nsuserdefaults data
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-    NSMutableArray *watchedWebsite = [[watchedItemsArray objectAtIndex:[_itemIndex integerValue]]mutableCopy];
-    [watchedWebsite replaceObjectAtIndex:2 withObject:[NSNumber numberWithInteger:notifCountStepper.value]];
-    [watchedItemsArray replaceObjectAtIndex:[_itemIndex integerValue] withObject:watchedWebsite];
-    [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-    [defaults synchronize];
+    //update the new notif count value in the store
+    NSInteger itemIndex = [_itemIndex integerValue];
+    NSNumber *notifCount = [NSNumber numberWithInteger:notifCountStepper.value];
+    WebsiteStore *store = [WebsiteStore sharedInstance];
+    [store updateItemAtIndex:itemIndex withNewNotificationCount:notifCount];
 }
 
 //Updates the notifIntervalLabel/NSUserDefaults on notifIntervalStepper value change
@@ -207,25 +198,22 @@
     else
         [notifIntervalLabel setText:[NSString stringWithFormat:@"Time Between Alerts: %lu min.",(long)notifIntervalStepper.value]];
 
-    //update the stepper value in nsuserdefaults data
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-    NSMutableArray *watchedWebsite = [[watchedItemsArray objectAtIndex:[_itemIndex integerValue]]mutableCopy];
-    [watchedWebsite replaceObjectAtIndex:3 withObject:[NSNumber numberWithInteger:notifIntervalStepper.value]];
-    [watchedItemsArray replaceObjectAtIndex:[_itemIndex integerValue] withObject:watchedWebsite];
-    [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-    [defaults synchronize];
+    //update the new notif count value in the store
+    NSInteger itemIndex = [_itemIndex integerValue];
+    NSNumber *notifInterval = [NSNumber numberWithInteger:notifIntervalStepper.value];
+    WebsiteStore *store = [WebsiteStore sharedInstance];
+    [store updateItemAtIndex:itemIndex withNewNotificationInterval:notifInterval];
 }
  
 //Opens the current url in safari
 - (IBAction)openInSafari:(id)sender {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *watchedItemsArray = [defaults arrayForKey:@"watchedItems"];
-    NSArray *watchedWebsite = [watchedItemsArray objectAtIndex:[_itemIndex integerValue]];
-    NSString *websiteURLString = [watchedWebsite objectAtIndex:0];
+    //get the url for this website item
+    WebsiteStore *store = [WebsiteStore sharedInstance];
+     NSString *websiteURLString = [store urlOfItemWithIndex: [_itemIndex integerValue]];
     NSURL *websiteURL = [NSURL URLWithString:websiteURLString];
     
+    //try to open in a SafariViewController
     if ([[UIApplication sharedApplication] canOpenURL:websiteURL]) {
         [[UIApplication sharedApplication] openURL:websiteURL];
     }
@@ -263,12 +251,9 @@
 //Completion handler for confirming item deletion
 - (void)deleteAndReturnToMain {
     
-    //remove the website and save changes to NSUserdefaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-    [watchedItemsArray removeObjectAtIndex:[_itemIndex integerValue]];
-    [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-    [defaults synchronize];
+    //remove the item at this index from the store
+    WebsiteStore *store = [WebsiteStore sharedInstance];
+    [store removeItemAtIndex: [_itemIndex integerValue]];
     
     //return to main
     [[self navigationController] popViewControllerAnimated:YES];

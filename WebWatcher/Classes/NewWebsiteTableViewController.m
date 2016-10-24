@@ -180,32 +180,21 @@
 //Save this website to NSUserDefaults and exit to main
 - (IBAction)saveWebsiteToWatchedWebsites:(id)sender{
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *watchedItemsArray = [[defaults arrayForKey:@"watchedItems"]mutableCopy];
-    
     //get the necessary data
     NSString *urlString = [urlTextField text];
-    NSString *htmlString = @"emptyHTML";
-    NSInteger notifCount = [notifCountStepper value];
-    NSInteger notifInterval = [notifIntervalStepper value];
+    NSNumber *notifCount = [NSNumber numberWithInteger: [notifCountStepper value]];
+    NSNumber *notifInterval = [NSNumber numberWithInteger: [notifIntervalStepper value]];
     
-    //create the new watched item
-    NSMutableArray *watchedItem = [[NSMutableArray alloc]initWithObjects:urlString, //add the url
-                                   htmlString,                             //initial html of website
-                                   [NSNumber numberWithInteger:notifCount],//# of notifs on change
-                                   [NSNumber numberWithInteger:notifInterval],//time between notifs
-                                   nil];
+    //add the new website to the store
+    WebsiteStore *store = [WebsiteStore sharedInstance];
+    [store addItemWithURL:urlString notificationCount:notifCount notificationInterval:notifInterval];
     
-    //add the new watched item to watchedItemsArray and save to NSUserDefaults
-    [watchedItemsArray addObject:watchedItem];
-    [defaults setObject:watchedItemsArray forKey:@"watchedItems"];
-    [defaults synchronize];
-    
+    //get the html boddy using the website monitor
     NSURL *url = [NSURL URLWithString:urlString];
-    
     WebsiteMonitor *websiteMonitor = [[WebsiteMonitor alloc] init];
     [websiteMonitor getInitialWatchedWebsiteStateWithURL:url];
     
+    //dismiss current view, returning to main ListTableViewController
     [self dismissViewControllerAnimated:YES completion:Nil];
 }
 
