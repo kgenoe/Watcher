@@ -181,7 +181,8 @@
 - (IBAction)saveWebsiteToWatchedWebsites:(id)sender{
     
     //get the necessary data
-    NSString *urlString = [urlTextField text];
+    NSURL *url = [NSURL URLWithString: [urlTextField text]]; //convert to url 1st to format uniformly
+    NSString *urlString = [url absoluteString];
     NSNumber *notifCount = [NSNumber numberWithInteger: [notifCountStepper value]];
     NSNumber *notifInterval = [NSNumber numberWithInteger: [notifIntervalStepper value]];
     
@@ -189,8 +190,7 @@
     WebsiteStore *store = [WebsiteStore sharedInstance];
     [store addItemWithURL:urlString notificationCount:notifCount notificationInterval:notifInterval];
     
-    //get the html boddy using the website monitor
-    NSURL *url = [NSURL URLWithString:urlString];
+    //get the html body using the website monitor
     WebsiteMonitor *websiteMonitor = [[WebsiteMonitor alloc] init];
     [websiteMonitor getInitialWatchedWebsiteStateWithURL:url];
     

@@ -20,25 +20,30 @@
 
 
 - (void) getInitialWatchedWebsiteStateWithURL:(NSURL *)url{
+    
+    
     //Start async task to retrieve page html
     NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if(error == nil){
-            //get the url from the response
-            NSString *urlString = [[response URL] absoluteString];
+            
+            //get the string of the url function parameter
+            NSString *urlString = [url absoluteString];
             //get the html from the data
             NSString *htmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
             //find the urlString in the watched items
-            NSMutableArray *watchedItemsArray = [[WebsiteStore sharedInstance] store];
+            NSLog(@"Webstore item count: %lu",(long)[[WebsiteStore sharedInstance] itemCount]);
             for (int i = 0; i < [[WebsiteStore sharedInstance] itemCount]; i++) {
                 
-                NSMutableArray *watchedItem = [[watchedItemsArray objectAtIndex:i]mutableCopy];
-                NSString *watchedURLString = [watchedItem objectAtIndex:0];
-                //find the url for this response (may be a subset because of trailing /)
-                if ([urlString containsString:watchedURLString]) {
+                NSString *watchedURLString = [[WebsiteStore sharedInstance] urlOfItemWithIndex:i];
+                
+                //find the url for this response
+                if ([urlString isEqualToString:watchedURLString] ) {
+    
                     //add fetched HTML to this watched item
                     WebsiteStore *store = [WebsiteStore sharedInstance];
                     [store updateItemAtIndex:i withNewHTMLString:htmlString];
+                    NSLog(@"added HTML to item");
                     break;
                 }
             }
