@@ -113,9 +113,7 @@
     //ensure item exists at index
     if (index < [storeArray count]){
         itemArray = [storeArray objectAtIndex:index];
-        //ensure item has a notif count value
-        if ([itemArray count] > 2)
-            notifCount = [[itemArray objectAtIndex:1] integerValue];
+        notifCount = [[itemArray objectAtIndex:2] integerValue];
     }
     return notifCount;
 }
@@ -131,7 +129,7 @@
         itemArray = [storeArray objectAtIndex:index];
         //ensure item has a notif interval value
         if ([itemArray count] > 3)
-            notifInterval = [[itemArray objectAtIndex:1] integerValue];
+            notifInterval = [[itemArray objectAtIndex:3] integerValue];
     }
     return notifInterval;
 }

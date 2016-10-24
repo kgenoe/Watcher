@@ -15,4 +15,7 @@
 - (void) getInitialWatchedWebsiteStateWithURL:(NSURL *)url;
 - (void) checkForWatchedWebsiteUpdatesWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 
+- (void)scheduleNotificationsForWatchedItemAtIndex:(NSInteger)index;
+
+
 @end

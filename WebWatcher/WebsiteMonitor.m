@@ -126,6 +126,7 @@
 //Schedules the notifications for a website after changes have been detected
 - (void)scheduleNotificationsForWatchedItemAtIndex:(NSInteger)index{
   
+    
     //get item components from store
     WebsiteStore *store = [WebsiteStore sharedInstance];
     NSString *urlString = [store urlOfItemWithIndex:index];
@@ -133,6 +134,7 @@
     NSInteger notifInterval = [store notifIntervalOfItemWithIndex:index];
     
     for(int i = 0;i < notifCount; i++){
+        
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.alertBody = [NSString stringWithFormat:@"%@ has been changed!",urlString];
         localNotification.soundName = UILocalNotificationDefaultSoundName;

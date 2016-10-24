@@ -185,7 +185,7 @@
     NSString *urlString = [url absoluteString];
     NSNumber *notifCount = [NSNumber numberWithInteger: [notifCountStepper value]];
     NSNumber *notifInterval = [NSNumber numberWithInteger: [notifIntervalStepper value]];
-    
+        
     //add the new website to the store
     WebsiteStore *store = [WebsiteStore sharedInstance];
     [store addItemWithURL:urlString notificationCount:notifCount notificationInterval:notifInterval];

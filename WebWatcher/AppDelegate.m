@@ -48,7 +48,7 @@
 
 #pragma mark - Background refresh
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
-    NSLog(@"Background refesh triggered");
+
     WebsiteMonitor *websiteMonitor = [[WebsiteMonitor alloc] init];
     [websiteMonitor checkForWatchedWebsiteUpdatesWithCompletionHandler:completionHandler];
 }
