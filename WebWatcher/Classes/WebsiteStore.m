@@ -38,6 +38,7 @@
         
         //assign NSUserDefaults property
         _defaults = [NSUserDefaults standardUserDefaults];
+        _storeName = DefaultStoreName;
 
         //Try to get store
         NSMutableArray *watchedItemsArray = [[_defaults arrayForKey:_storeName] mutableCopy];

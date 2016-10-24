@@ -11,7 +11,7 @@
 @interface WebsiteMonitor ()
 
 - (NSArray *)getWatchedItemsArray;
-- (void)handlResponse: (NSURLResponse *)response withData: (NSData *)data withBackgroundCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+- (void)handleResponse: (NSURLResponse *)response withIndex:(NSInteger)index withData:(NSData *)data withBackgroundCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 - (void)scheduleNotificationsForWatchedItemAtIndex:(NSInteger)index;
 
 @end
@@ -59,7 +59,7 @@
         //Start async task to retrieve page html
         NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if(error == nil)
-                [self handleResponse:response withData:data withBackgroundCompletionHandler:completionHandler];
+                [self handleResponse:response withIndex:i withData:data withBackgroundCompletionHandler:completionHandler];
             else{
                 NSLog(@"No html exists for index %d",i);
             }
@@ -75,36 +75,16 @@
 }
 
 
-- (void)handleResponse: (NSURLResponse *)response withData: (NSData *)data withBackgroundCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
-    
+- (void)handleResponse: (NSURLResponse *)response withIndex:(NSInteger)index withData:(NSData *)data withBackgroundCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+
     //get the url from the response
     NSString *urlString = [[response URL] absoluteString];
+    
     //get the html from the data
     NSString *fetchedHTMLString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    //find the watchedItem with the matching url string
-    NSMutableArray *watchedItemsArray = [[self getWatchedItemsArray] mutableCopy];
-    NSMutableArray *watchedItem;
-    NSInteger index = -1;
-    for (int i = 0; i < [watchedItemsArray count]; i++) {
-        watchedItem = [[watchedItemsArray objectAtIndex:i]mutableCopy];
-        NSString *watchedURLString = [watchedItem objectAtIndex:0];
-        //find the url for this response (may be a subset because of trailing /)
-        if ([urlString containsString:watchedURLString]){
-            index = i;
-            break; //watchedItem is now the proper one
-        }
-    }
-    
-    //get the previous html string
-    NSString *oldHTMLString = [watchedItem objectAtIndex:1];
-    
-    //if no matching url in NSUserDefaults was found for the response URL
-    if (index == -1) {
-        NSLog(@"FATAL ERROR, COULD NOT FIND URL IN DEFAULTS:");
-        NSLog(@"urlString from response %@",urlString);
-    }
-    
+    //get the url of the watched item at the provided index
+    NSString *oldHTMLString = [[WebsiteStore sharedInstance] htmlOfItemWithIndex:index];
     
     if ([oldHTMLString isEqualToString:@"emptyHTML"] && fetchedHTMLString != nil) {
         //html not previously set, assign it the newhtml but dont send notification of change
@@ -117,7 +97,8 @@
         completionHandler(UIBackgroundFetchResultNewData);
     }
     else if (![fetchedHTMLString isEqualToString:oldHTMLString]) {
-        
+        NSLog(@"! Change to %@", urlString);
+
         //There have been changes in the html since the last check
         WebsiteStore *store = [WebsiteStore sharedInstance];
         
@@ -132,7 +113,7 @@
     }
     else{
         //tell handler no new data was fetched
-        //NSLog(@"no changes for index %lu",(long)index);
+        NSLog(@"No change to %@", urlString);
         completionHandler(UIBackgroundFetchResultNoData);
     }
 }
